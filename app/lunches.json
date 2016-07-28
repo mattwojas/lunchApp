@@ -1,0 +1,38 @@
+[
+		{
+			"name": "streen cart", 
+			"done": false,
+			"rating": 10.95,
+			"meals": [
+			{
+				"name": "french Fries",
+				"price": 12,
+				"rating": 8,
+				"times": 0
+			},{
+				"name": "hot dogs",
+				"price": 12,
+				"rating": 8,
+				"times": 0
+			}
+			]
+		},
+		{
+			"name": "bahmi boys", 
+			"done": false,
+			"rating": 10.95,
+			"meals": [
+			{
+				"name": "french Fries",
+				"price": 12,
+				"rating": 8,
+				"times": 0
+			},{
+				"name": "hot dogs",
+				"price": 12,
+				"rating": 8,
+				"times": 0
+			}
+			]
+		}
+	]

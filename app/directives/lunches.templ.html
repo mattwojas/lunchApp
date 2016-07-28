@@ -1,0 +1,67 @@
+<div>
+<header>
+	<h1>{{userName}}</h1>
+    <div class="useridCont" ng-show="lunches.userid.length">
+				{{lunches.userid}}, use this link to access these lunches: <br/>
+				<a href="http://mattwojas.com/lunchapp/#/lunches?id={{lunches.userid}}">http://mattwojas.com/lunchapp/#/lunches?id={{lunches.userid}}</a>
+	</div>
+	<form>
+		<button class="btn btn-save" ng-click="lunches.saveLunches(lunches.items)">Save</button>
+	<button class="btn btn-clone" ng-click="lunches.cloneLunches(lunches.items)">Clone</button>
+</form>
+	<form novalidate ng-submit="lunches.add(item)">
+		<input required ng-model="item.name" placeholder="Restaurant">
+		<select required ng-init="item.rating =  options[0].value" ng-model="item.rating" ng-options="option.value as option.name for option in options">
+
+
+		</select>
+		<input type="submit" value="add place" ></input>
+        
+	</form>
+    <input type="text" class="lunch_search" ng-model="item.search" 
+      placeholder="Filter by 'Restaurant Name'">
+</header>
+		<div class="item_cont" ng-repeat="item in lunches.items | filter:{ name: item.search } track by $index">
+
+			<div class="mainItem grid-item">
+				<h2>{{item.name}}</h2>
+				{{item.rating}} out of 10<br/>
+				<button class="delBtn" ng-click="lunches.delete($index)">delete</button>
+
+			</div>
+
+			<div class="mealCont" ng-show="!item.meals.length">
+				No Meals!  Add a meal...
+			</div>
+			<div ng-repeat="meal in item.meals" class="meal_cont">
+				<!-- <div class="mealTimes">{{meal.times}}</div> -->
+				<div class="mealRating">
+                
+                
+                
+                <i class="fa fa-star" aria-hidden="true" ng-if="meal.rating >= 1"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="meal.rating >= 2"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="meal.rating >= 3"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="meal.rating >= 4"></i>
+                <i class="fa fa-star" aria-hidden="true" ng-if="meal.rating >= 5"></i>
+
+
+                </div>
+				<div class="mealText">{{meal.name}}</div> 
+				 <div class="mealPrice">{{meal.price | currency}}</div>
+				<button class="delMealBtn" ng-click="lunches.deleteMeal(meal, $index, $parent.$index)">X</button>
+				<!-- <button class="addTimes" ng-click="addTimes(meal)">add</button> -->
+			</div>
+
+
+<form class="mealForm" novalidate >
+			<input required type="text" ng-model="item.meals.name" placeholder="Meal Name"/>
+			<select ng-init="item.meals.rating = options[0].value"  ng-options="option.value as option.name for option in rateOptions" ng-model="item.meals.rating">
+			
+			</select>
+			<input required type="number" ng-model="item.meals.price" placeholder="Meal Price"/>
+			<button class="addMeal" ng-click="lunches.addMeal(item.meals, $index, $parent.$index)">add meal</button>
+		</form>  
+
+		</div>
+	</div>
